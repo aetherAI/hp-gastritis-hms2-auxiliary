@@ -1,0 +1,43 @@
+RESULT_DIR: "results/result_10x"
+MODEL_PATH: "${RESULT_DIR}/model.pt"
+OPTIMIZER_STATE_PATH: "${RESULT_DIR}/opt_state.pt"
+STATES_PATH: "${RESULT_DIR}/states.pt"
+LOAD_MODEL_BEFORE_TRAIN: False
+CONFIG_RECORD_PATH: "${RESULT_DIR}/config.yaml"
+
+USE_MIXED_PRECISION: True
+USE_HMS2: True
+
+TRAIN_CSV_PATH: "data/datalists/train.csv"
+VAL_CSV_PATH: "data/datalists/val.csv"
+TEST_CSV_PATH: "data/datalists/test.csv"
+CONTOUR_DIR: NULL
+SLIDE_DIR: "data/slides"
+SLIDE_FILE_EXTENSION: ".ndpi"
+SLIDE_READER: "openslide"
+RESIZE_RATIO: 0.25
+INPUT_SIZE: [80000, 80000, 3]
+AUGMENTS: []
+GPU_AUGMENTS: ["flip", "rigid", "hed_perturb"]
+
+MODEL: "resnet50_frozenbn"
+POOL_USE: "gmp_scaled_2k"
+NUM_CLASSES: 2
+BATCH_SIZE: 1
+EPOCHS: 200
+LOSS: "ce"
+METRIC_LIST: ["accuracy"]
+OPTIMIZER: "adamw"
+INIT_LEARNING_RATE: 0.00001
+REDUCE_LR_FACTOR: 0.1
+REDUCE_LR_PATIENCE: 8
+TIME_RECORD_PATH: "${RESULT_DIR}/time_record.csv"
+TEST_TIME_RECORD_PATH: "${RESULT_DIR}/test_time_record.csv"
+
+TEST_RESULT_PATH: "${RESULT_DIR}/test_result.json"
+ENABLE_VIZ: True
+VIZ_RESIZE_RATIO: 0.01
+VIZ_FOLDER: "${RESULT_DIR}/viz"
+VIZ_RAW_FOLDER: "${RESULT_DIR}/viz_raw"
+
+DEBUG_PATH: NULL
