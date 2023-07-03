@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hp-gastritis-hms2-auxiliary"
 version = "0.1.0"
-description = "This project can reproduce the results in the paper, 'A two-tiered deep learning-based model for histologic diagnosis of Helicobacter gastritis'."
+description = "This project reproduces the results in the paper, 'A two-tiered deep learning-based model for histologic diagnosis of Helicobacter gastritis'."
 authors = ["Chi-Chung Chen <chenchc@aetherai.com>"]
 
 [tool.poetry.dependencies]
