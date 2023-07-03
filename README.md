@@ -56,19 +56,42 @@ poetry run poe install
 
 ### Whole-slide model (HMS)
 
-Here, we take 5x-magnified input for example.
+Here, we take the config with 5x-magnified input (`configs/hms/config_5x.yaml`) for example, which can be modified for your own dataset.
 
-Train a model:
+If needed, modify the datalists: `data/datalists/train.csv`, `data/datalists/val.csv`, and `data/datalists/test.csv` refered by the config. Copy or create softlinks of slide images to `data/slides`.
+
+To train a model:
 ```
 CUDA_VISIBLE_DEVICES=[4 GPUs] mpirun --bind-to none -np 4 poetry run python -m hms2.pipeline.train --config configs/hms/config_5x.yaml
 ```
 
-Test the model to generate slide-level predictions:
+To test the model to generate slide-level predictions:
 ```
 CUDA_VISIBLE_DEVICES=[4 GPUs] mpirun --bind-to none -np 4 poetry run python -m hms2.pipeline.test --config configs/hms/config_5x.yaml
 ```
 
-Generate heatmaps by CAM:
+To generate heatmaps by CAM:
 ```
 CUDA_VISIBLE_DEVICES=[4 GPUs] mpirun --bind-to none -np 4 poetry run python -m hms2.pipeline.visualize --config configs/hms/config_5x.yaml
+```
+
+### Auxiliary model
+
+We take the config with 5x-magnified input and logistic regression (`configs/auxiliary/config_5x_logistic.yaml`) for example.
+
+It requires a trained HMS model (`results/result_5x/model.pt`) and an annotated dataset (list: `data/datalists/annotated_train.csv`; masks in .npy: `data/masks/5x`).
+
+To extract embedding features:
+```
+CUDA_VISIBLE_DEVICES=[1 GPU] poetry run python -m scripts.auxiliary.extract --config configs/auxiliary/config_auxiliary_5x_logistic.yaml
+```
+
+To find the optimal hyper-parameters for an auxiliary model and train one:
+```
+poetry run python -m scripts.auxiliary.train --config configs/auxiliary/config_auxiliary_5x_logistic.yaml
+```
+
+To generate heatmaps:
+```
+CUDA_VISIBLE_DEVICES=[1 GPU] poetry run python -m scripts.auxiliary.viz --config configs/auxiliary/config_auxiliary_5x_logistic.yaml
 ```

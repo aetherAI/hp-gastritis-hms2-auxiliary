@@ -1,0 +1,30 @@
+RESULT_DIR: "results/result_5x"
+MODEL_PATH: "${RESULT_DIR}/model.pt"
+HMS_CONFIG_RECORD_PATH: "${RESULT_DIR}/config.yaml"
+AUXILIARY_CONFIG_RECORD_PATH: "${RESULT_DIR}/auxiliary_config.yaml"
+
+TRAIN_CSV_PATH: "data/datalists/train.csv"
+VAL_CSV_PATH: "data/datalists/val.csv"
+TEST_CSV_PATH: "data/datalists/test.csv"
+SLIDE_DIR: "data/slides"
+SLIDE_FILE_EXTENSION: ".ndpi"
+SLIDE_READER: "openslide"
+RESIZE_RATIO: 0.125
+
+ANNOTATED_TRAIN_LIST: "data/datalists/annotated_train.csv"
+MASK_POSITIVE_VALUE: 128
+MASK_NEGATIVE_VALUE: 0
+MASK_DONTCARE_VALUE: 255
+MASK_FOLDER: "data/masks/5x"
+
+TRAIN_MATRIX_PATH: "${RESULT_DIR}/train_matrix.npz"
+
+AUXILIARY_MODEL_TYPE: "flaml"
+FLAML_METRIC: "roc_auc"
+FLAML_REBALANCE: True
+FLAML_TIME_BUDGET: 86400
+FLAML_DUMP_PATH: "${RESULT_DIR}/flaml.pkl"
+AUXILIARY_MODEL_PATH: "${RESULT_DIR}/auxiliary_flaml_model.txt"
+
+VIZ_CSV_PATH: "data/datalists/test.csv"
+VIZ_RESULT_FOLDER: "${RESULT_DIR}/viz_auxiliary_flaml"
