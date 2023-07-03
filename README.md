@@ -2,6 +2,9 @@
 
 This repository provides scripts to reproduce the results in the paper "A two-tiered deep learning-based model for histologic diagnosis of Helicobacter gastritis".
 
+The algorithm classifies histologic gastric biopsies as either HP-positive or HP-negative (AUC: 0.9739), and identifies the locations of HP loci (Average precision: 0.5796).
+![Cover](misc/cover_art.png)
+
 ## Publications
 
 (Under review.)
@@ -58,7 +61,9 @@ poetry run poe install
 
 Here, we take the config with 5x-magnified input (`configs/hms/config_5x.yaml`) for example, which can be modified for your own dataset.
 
-If needed, modify the datalists: `data/datalists/train.csv`, `data/datalists/val.csv`, and `data/datalists/test.csv` refered by the config. Copy or create softlinks of slide images to `data/slides`.
+This model requires only slide-level labels to be trained.
+Modify the datalists: `data/datalists/train.csv`, `data/datalists/val.csv`, and `data/datalists/test.csv` refered by the config.
+Then, Copy or create softlinks of slide images to `data/slides`.
 
 To train a model:
 ```
@@ -79,7 +84,7 @@ CUDA_VISIBLE_DEVICES=[4 GPUs] mpirun --bind-to none -np 4 poetry run python -m h
 
 We take the config with 5x-magnified input and logistic regression (`configs/auxiliary/config_5x_logistic.yaml`) for example.
 
-It requires a trained HMS model (`results/result_5x/model.pt`) and an annotated dataset (list: `data/datalists/annotated_train.csv`; masks in .npy: `data/masks/5x`).
+It requires a trained HMS model (`results/result_5x/model.pt`) and an annotated dataset (list: `data/datalists/annotated_train.csv`; masks in .npy: `data/masks/5x`) to be trained.
 
 To extract embedding features:
 ```
